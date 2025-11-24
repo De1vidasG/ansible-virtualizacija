@@ -71,10 +71,10 @@
         dest: ./inventory
         content: |
           [web]
-          web-vm ansible_host={{ web_ip }} ansible_user=degi0449
+          web-vm ansible_host={{ web_ip }} ansible_user={{ web_user }}
 
           [db]
-          db-vm ansible_host={{ db_ip }} ansible_user=degi0449
+          db-vm ansible_host={{ db_ip }} ansible_user={{ db_user }}
 
           [client]
-          client-vm ansible_host={{ client_ip }} ansible_user=degi0449
+          client-vm ansible_host={{ client_ip }} ansible_user={{ client_user }}

@@ -1,4 +1,4 @@
 ---
 web_user: degi0449
-db_user: degi0449
-client_user: degi0449
+db_user: degi0449 #pakeist i kito žmogaus
+client_user: degi0449 # pakeist į kito žmogaus

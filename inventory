@@ -1,0 +1,8 @@
+[web]
+webserver-vm ansible_host=10.0.1.106 ansible_user=degi0449
+
+[db]
+database-vm ansible_host=10.0.1.110 ansible_user=degi0449
+
+[client]
+client-vm ansible_host=10.0.1.136 ansible_user=degi0449

@@ -1,0 +1,11 @@
+---
+  - hosts: localhost
+    vars_files:
+      - host_vars/vms/vault.yml
+    roles:
+      - createvm
+
+  - hosts: web
+    become: true
+    roles:
+      - nginx

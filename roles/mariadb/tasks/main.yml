@@ -1,0 +1,52 @@
+    - name: Install docker dependencies
+      apt:
+        name:
+          - ca-certificates
+          - curl
+          - gnupg
+        update_cache: true
+
+    - name: add Dockers GPG key
+      apt_key:
+        url: https://download.docker.com/linux/debian/gpg
+
+    - name: add Dockers repo
+      apt_repository:
+        repo: deb https://download.docker.com/linux/debian bookworm stable
+
+    - name: install docker packages
+      apt:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-buildx-plugin
+        update_cache: true
+
+    - name: install required library for docker.container
+      apt:
+        name:
+          - python3-pip
+          - python3-requests
+        state: present
+        update_cache: yes
+
+    - name: Run mariadb container
+      community.docker.docker_container:
+        name: mariadb-server
+        image: de1vidas/test-custom-mariadb-virt:latest
+        state: started
+        restart_policy: always
+        ports: 3306:3306
+
+    - name: Wait for mariadb to start
+      wait_for:
+        port: 3306
+        delay: 10
+
+    - name: Create user in mariaDB for webserver-vm connection
+      shell: >
+        docker exec mariadb-server /opt/mariadb/bin/mysql -u root -p"{{ db_root_pass }}" --socket=/opt/mariadb/mysql.sock -e
+        "CREATE USER '{{ webserver_user }}'@'{{ webserver_ip }}' IDENTIFIED BY '{{ db_root_pass }}';
+         GRANT ALL PRIVILEGES ON *.* TO '{{ webserver_user }}'@'{{ webserver_ip }}' WITH GRANT OPTION;
+         FLUSH PRIVILEGES;"

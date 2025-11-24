@@ -1,11 +1,24 @@
 ---
-  - hosts: localhost
-    vars_files:
-      - host_vars/vms/vault.yml
-    roles:
-      - createvm
+#  - hosts: localhost
+#    vars_files:
+#      - host_vars/vms/vault.yml
+#    roles:
+#      - createvm
 
   - hosts: web
     become: true
     roles:
       - nginx
+
+  - hosts: db
+    become: true
+    vars:
+      webserver_ip: "{{ hostvars['web-vm'] .ansible_host }}"
+      webserver_user: "{{ hostvars['web-vm'] .ansible_user }}"
+    roles:
+      - mariadb
+
+  - hosts: client
+    become: true
+    roles:
+      - client

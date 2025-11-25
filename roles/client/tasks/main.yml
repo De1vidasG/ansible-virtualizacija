@@ -22,3 +22,26 @@
           - containerd.io
           - docker-buildx-plugin
         update_cache: true
+
+    - name: install required library for docker.container
+      apt:
+        name:
+          - python3-pip
+          - python3-requests
+        state: present
+        update_cache: yes
+
+
+    - name: Run lync text-browser container
+      community.docker.docker_container:
+        name: lynx-browser
+        image: jess/lynx
+        state: started
+
+
+
+    - name: create linux user
+      user:
+        name: linuxuser
+        password: "{{ 'bebras' | password_hash('sha512') }}"
+        state: present

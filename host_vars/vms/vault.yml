@@ -1,3 +1,5 @@
 user1_password: Deividas1
-user2_password: Deividas1 #pakeisti i kito zmogaus
-user3_password: Deividas1 #pakeisti i kito zmogaus
+user2_password: Daniel146273 #pakeisti i kito zmogaus
+user3_password: Vilkyskiu0 #pakeisti i kito zmogaus
+
+ansible_become_password: 123

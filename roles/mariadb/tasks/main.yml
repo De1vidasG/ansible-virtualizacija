@@ -45,7 +45,7 @@
         delay: 10
 
     - name: Create user in mariaDB for webserver-vm connection
-      shell: >
+      shell:
         docker exec mariadb-server /opt/mariadb/bin/mysql -u root -p"{{ db_root_pass }}" --socket=/opt/mariadb/mysql.sock -e
         "CREATE USER '{{ webserver_user }}'@'{{ webserver_ip }}' IDENTIFIED BY '{{ db_root_pass }}';
          GRANT ALL PRIVILEGES ON *.* TO '{{ webserver_user }}'@'{{ webserver_ip }}' WITH GRANT OPTION;

@@ -1,8 +1,0 @@
-[web]
-web-vm ansible_host=10.0.0.210 ansible_user=degi0449
-
-[db]
-db-vm ansible_host=10.0.1.1 ansible_user=degi0449
-
-[client]
-client-vm ansible_host=10.0.1.43 ansible_user=degi0449

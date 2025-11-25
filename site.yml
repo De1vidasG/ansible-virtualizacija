@@ -12,9 +12,6 @@
 
   - hosts: db
     become: true
-    vars:
-      webserver_ip: "{{ hostvars['web-vm'] .ansible_host }}"
-      webserver_user: "{{ hostvars['web-vm'] .ansible_user }}"
     roles:
       - mariadb
 

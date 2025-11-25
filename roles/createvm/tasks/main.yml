@@ -33,7 +33,7 @@
         api_url: https://grid5.mif.vu.lt/cloud3/RPC2
         api_username: "{{ db_user }}"
         api_password: "{{ user2_password }}"
-        template_id: 2273
+        template_id: 3016
         attributes:
           name: database-vm
         disk_size: 16 GB

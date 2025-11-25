@@ -39,4 +39,4 @@
         ports: 80:80
         env:
           DB_HOST: "{{ hostvars['db-vm'].ansible_host }}"
-          DB_USER: "{{ hostvars['db-vm'].ansible_user }}"
+          DB_USER: "{{ hostvars['web-vm'].ansible_user }}"

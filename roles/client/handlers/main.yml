@@ -1,0 +1,4 @@
+---
+- name: reboot vm
+  reboot:
+    reboot_timeout: 600

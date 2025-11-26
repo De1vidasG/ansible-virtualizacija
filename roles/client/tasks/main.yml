@@ -32,11 +32,24 @@
         update_cache: yes
 
 
-    - name: Run lync text-browser container
-      community.docker.docker_container:
-        name: lynx-browser
-        image: jess/lynx
-        state: started
+    - name: Install XFCE4 desktop environment
+      apt:
+        name:
+          - xfce4
+          - xfce4-goodies
+        state: present
+        update_cache: yes
+
+    - name: Install LightDM
+      apt:
+        name: lightdm
+        state: present
+        update_cache: yes
+
+    - name: Install Firefox
+      apt:
+        name: firefox-esr
+        state: present
 
 
 

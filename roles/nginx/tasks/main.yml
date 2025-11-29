@@ -33,7 +33,7 @@
     - name: Run the container gotten from dockerhub
       community.docker.docker_container:
         name: custom_nginx_php
-        image: de1vidas/test-custom-nginxphp-virt:latest
+        image: de1vidas/test-custom-nginxphp-virt:1.7
         state: started
         restart_policy: always
         ports: 80:80

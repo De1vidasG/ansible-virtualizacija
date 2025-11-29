@@ -1,0 +1,33 @@
+- name: Generate SSH keypair locally
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars:
+    # Use lookup to find your home directory reliably
+    ssh_key_path: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa"
+
+  tasks:
+    - name: Generate SSH key (ed25519)
+      community.crypto.openssh_keypair:
+        path: "{{ ssh_key_path }}"
+        type: ed25519
+
+- name: Deploy SSH Public Key to Targets
+  hosts: all
+  gather_facts: false
+  tasks:
+
+    - name: Wait for SSH to become available
+      wait_for:
+        port: 22
+        host: "{{ ansible_host }}"
+        search_regex: OpenSSH
+        delay: 10
+        timeout: 300
+      connection: local
+
+    - name: Push public key to authorized_keys
+      ansible.posix.authorized_key:
+        user: "{{ ansible_user }}"
+        state: present
+        key: "{{ lookup('file', lookup('env', 'HOME') + '/.ssh/id_rsa.pub') }}"

@@ -4,6 +4,11 @@
       - host_vars/vms/vault.yml
     roles:
       - createvm
+    post_tasks:
+      - name: Refresh inventory to ensure new instances are recognized
+        meta: refresh_inventory
+
+  - import_playbook: ssh.yml
 
   - hosts: web
     become: true
